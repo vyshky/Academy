@@ -1,4 +1,4 @@
-﻿#include<iostream>
+#include<iostream>
 
 using namespace std;
 using std::cin;
@@ -67,19 +67,29 @@ public:
 class Student :public Teacher
 {
 	int point_average;
+	int course;
 public:
 	int get_point_average()const
 	{
 		return point_average;
 	}
+	int get_course()const
+	{
+		return course;
+	}
 	void set_point_average(int point_average)
 	{
 		this->point_average = point_average;
 	}
+	void set_course(int course)
+	{
+		this->course = course;
+	}
 	/*-----------------------------------------------------*/
-	Student(string name = "Student", string second_name = "class", double age = 0, int point_average = 0) :Teacher(name, second_name, age)
+	Student(string name = "Student", string second_name = "class", double age = 0, int point_average = 0, int course = 1) :Teacher(name, second_name, age)
 	{
 		this->point_average = point_average;
+		this->course = course;
 	}
 	~Student() {}
 	/*-----------------------------------------------------*/
@@ -89,7 +99,7 @@ public:
 		{
 			cout << "Ученик еще не закончил школу ";
 		}
-		cout << this->get_name() << " " << this->get_second_name() << " " << this->get_age() << " лет" << "\tСредный балл : " << point_average << endl;
+		cout << this->get_name() << " " << this->get_second_name() << " " << this->get_age() << " лет " << course << " курс " << "\tСредный балл : " << point_average << endl;
 		cout << "/*-----------------------------------------------------*/" << endl << endl;
 	}
 };
@@ -116,8 +126,8 @@ public:
 		this->graduate_work = graduate_work;
 	}
 	Graduate
-	(string name = "Student", string second_name = "class", double age = 0, int point_average = 0, bool graduate = false, string graduate_work = "default_graduate_work"
-	) :Student(name, second_name, age, point_average)
+	(string name = "Student", string second_name = "class", double age = 0, int point_average = 0, int course = 1, bool graduate = false, string graduate_work = "default_graduate_work"
+	) :Student(name, second_name, age, point_average, course)
 	{
 		this->graduate = graduate;
 		this->graduate_work = graduate_work;
@@ -129,7 +139,7 @@ public:
 		{
 			cout << "Ученик еще не закончил школу ";
 		}
-		cout << this->get_name() << " " << this->get_second_name() << " " << this->get_age() << " лет" << "\tСредный балл : " << this->get_point_average() << endl;
+		cout << this->get_name() << " " << this->get_second_name() << " " << this->get_age() << " лет " << this->get_course() << " курс " << "\tСредный балл : " << this->get_point_average() << endl;
 		cout << (this->graduate ? this->graduate_work : "Не дипломник") << endl;
 		cout << "/*-----------------------------------------------------*/" << endl << endl;
 	}
@@ -148,13 +158,17 @@ int main()
 
 
 
-	Student student("ivan", "Pavlov", 17, 66);
+	Student student("ivan", "Pavlov", 17, 66, 1);
 	student.info();
 
-	Graduate graduate("Diplom", "Diplomovich", 18, 100, true, "Тема : Разработка программы мониторинга сетевой активности компьютера.");
+	Graduate graduate("NeDiplom", "NeDiplomovich", 18, 100, 3, false, "Тема : Разработка программы мониторинга сетевой активности компьютера.");
 	graduate.info();
-	
-	Graduate graduate2("Diplom", "Diplomovich", 18, 100, false, "Тема : Разработка программы мониторинга сетевой активности компьютера.");
+
+	Graduate graduate2("Diplom", "Diplomovich", 18, 100, 4, true, "Тема : Разработка программы мониторинга сетевой активности компьютера.");
+	graduate2.info();
+
+
+	graduate2.set_graduate_work("Тема : Технология ADSL");	
 	graduate2.info();
 
 
